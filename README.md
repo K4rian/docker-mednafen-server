@@ -64,6 +64,7 @@ $ docker run -d \
 
 __Example 2:__                                     
 Run a password-protected server using default configuration:   
+— *In this example, the password is stored in the `secret.txt` file located in the current working directory.* 
 ```
 $ docker run -d \
     --name mednafen-server \
