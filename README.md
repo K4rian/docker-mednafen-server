@@ -34,10 +34,12 @@ MDFNSV_PASSWORD       |                | Server password *(__NOT__ recommended, 
 
 The server can be protected with a (clear, unencrypted) password and defined in various ways:  
 
-— Bind mount a text file containing the password into the container.
-The mountpoint path has to be `/run/secrets/mednafenserver`. This is the __recommended__ method. See the second example in the section below.
+— Bind mount a text file containing the password into the container.  
+The mountpoint path has to be `/run/secrets/mednafenserver`.   
+This is the __recommended__ method. See the second example in the section below.
 
-— Using the `MDFNSV_PASSWORD` environment variable when creating the container. This method is __NOT__ recommended for production since all environment variables are visible via `docker inspect` to any user that can use the `docker` command. 
+— Using the `MDFNSV_PASSWORD` environment variable when creating the container.   
+This method is __NOT__ recommended for production since all environment variables are visible via `docker inspect` to any user that can use the `docker` command. 
 
 — By editing the `server.conf` file located beside the server binary and accessed by mounting a volume on `/home/mednafen`.   
 
@@ -67,7 +69,7 @@ $ docker run -d \
     --name mednafen-server \
     --ulimit memlock=-1 \
     -p 4046:4046 \
-    -v "$(pwd)"/compose/secret.txt:/run/secrets/mednafenserver:ro \
+    -v "$(pwd)"/secret.txt:/run/secrets/mednafenserver:ro \
     -i k4rian/mednafen-server:latest
 ```
 
