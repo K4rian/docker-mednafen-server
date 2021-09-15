@@ -54,10 +54,10 @@ Run a public server on port `40451` with a maximum of `4 clients` and a connecti
 $ docker run -d \
     --name mednafen-server \
     --ulimit memlock=-1 \
-    -p 40460:40460 \
+    -p 40451:40451 \
     -e MDFNSV_MAXCLIENTS=4 \
     -e MDFNSV_CONNECTTIMEOUT=15 \
-    -e MDFNSV_PORT=40460 \
+    -e MDFNSV_PORT=40451 \
     -i k4rian/mednafen-server:latest
 ```
 
