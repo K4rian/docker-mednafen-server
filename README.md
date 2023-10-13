@@ -1,18 +1,22 @@
-docker-mednafen-server
-=====
+<p align="center">
+ <img alt="docker-mednafen-server logo" src="https://github.com/K4rian/docker-mednafen-server/blob/assets/icons/placeholder.svg" width=500 align="center">
+</p>
 
-A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine). 
+A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine).
+<br />
+Mednafen-Server allows to play many emulator games online via netplay using the [Mednafen](https://mednafen.github.io/) multi-system emulator.
 
+---
+<div align="center">
 
+| Docker Tag | Version | Description | Release Date |
+| ---        | :---:   | ---         | :---:        |
+| [latest](https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile) | 1.1 | Latest stable release | 2023-10-XX |
+</div>
+<p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
-## Introduction 
-
-This image is used to set up and run a __Mednafen server__ that allow to play many emulators games online via netplay using [Mednafen](https://mednafen.github.io/).
-
-
-
+---
 ## Environment variables
-
 A few environment variables can be tweaked when creating a container to define the server configuration:
 
 Variable              | Default value  | Description 
@@ -21,17 +25,15 @@ MDFNSV_MAXCLIENTS     | 50             | Maximum number of clients.
 MDFNSV_CONNECTTIMEOUT | 5              | Connection (login) timeout (in seconds).
 MDFNSV_PORT           | 4046           | Port to listen on.
 MDFNSV_IDLETIMEOUT    | 30             | Idle timeout (in seconds). Disconnect a client if no data is received from them since X seconds ago.
-MDFNSV_MAXCMDPAYLOAD  | 5242880        | The maximum data in the payload of a command to be received by the server (including save state transfers).
-MDFNSV_MINSENDQSIZE   | 262144         | Soft send queue start size, and minimum size (memory allocated) it will shrink to.
-MDFNSV_MAXSENDQSIZE   | 8388608        | Maximum size each internal per-client soft send queue is allowed to grow to. The client is dropped on overflowing this size.
+MDFNSV_MAXCMDPAYLOAD  | 5242880        | The maximum data (in bytes) in the payload of a command to be received by the server (including save state transfers).
+MDFNSV_MINSENDQSIZE   | 262144         | Soft send queue start size (in bytes), and minimum size (memory allocated) it will shrink to.
+MDFNSV_MAXSENDQSIZE   | 8388608        | Maximum size (in bytes) each internal per-client soft send queue is allowed to grow to. The client is dropped on overflowing this size.
 MDFNSV_PASSWORD       |                | Server password *(__NOT__ recommended, see the section below)*.
+MDFNSV_ISPUBLIC       | 0              | Make the server public. Ignore the password environment variable (if set) and remove any existing password from the configuration file.
 
-*Descriptions taken from the original __standard.conf__ file in the Mednafen server sources.*
-
-
+*Descriptions mostly taken from the original __standard.conf__ file in the Mednafen-Server sources.*
 
 ## Password protection
-
 The server can be protected with a (clear, unencrypted) password and defined in various ways:  
 
 — Bind mount a text file containing the password into the container.  
@@ -43,72 +45,69 @@ This method is __NOT__ recommended for production since all environment variable
 
 — By editing the `server.conf` file located beside the server binary and accessed by mounting a volume on `/home/mednafen`.   
 
-
-
-## Example uses
-
+## Usage
 __Example 1:__                                 
 Run a public server on port `40451` with a maximum of `4 clients` and a connection time out of `15 seconds`:    
 — *The `ulimit` option is optional but highly recommended for the server to run properly.* 
+```bash
+docker run -d \
+  --name mednafen-server \
+  --ulimit memlock=-1 \
+  -p 40451:40451 \
+  -e MDFNSV_MAXCLIENTS=4 \
+  -e MDFNSV_CONNECTTIMEOUT=15 \
+  -e MDFNSV_PORT=40451 \
+  -e MDFNSV_ISPUBLIC=1 \
+  -i k4rian/mednafen-server:latest
 ```
-$ docker run -d \
-    --name mednafen-server \
-    --ulimit memlock=-1 \
-    -p 40451:40451 \
-    -e MDFNSV_MAXCLIENTS=4 \
-    -e MDFNSV_CONNECTTIMEOUT=15 \
-    -e MDFNSV_PORT=40451 \
-    -i k4rian/mednafen-server:latest
-```
-
 
 __Example 2:__                                     
 Run a password-protected server using default configuration:   
 — *In this example, the password is stored in the `secret.txt` file located in the current working directory.* 
+```bash
+docker run -d \
+  --name mednafen-server \
+  --ulimit memlock=-1 \
+  -p 4046:4046 \
+  -v "$(pwd)"/secret.txt:/run/secrets/mednafenserver:ro \
+  -i k4rian/mednafen-server:latest
 ```
-$ docker run -d \
-    --name mednafen-server \
-    --ulimit memlock=-1 \
-    -p 4046:4046 \
-    -v "$(pwd)"/secret.txt:/run/secrets/mednafenserver:ro \
-    -i k4rian/mednafen-server:latest
-```
-
 
 __Example 3:__                                     
 Run a password-protected __testing__ server on port `4444`:   
-```
-$ docker run -d \
-    --name mednafen-server-test \
-    --ulimit memlock=-1 \
-    -p 4444:4444 \
-    -e MDFNSV_PORT=4444 \
-    -e MDFNSV_PASSWORD="testing" \
-    -i k4rian/mednafen-server:latest 
+```bash
+docker run -d \
+  --name mednafen-server-test \
+  --ulimit memlock=-1 \
+  -p 4444:4444 \
+  -e MDFNSV_PORT=4444 \
+  -e MDFNSV_PASSWORD="testing" \
+  -i k4rian/mednafen-server:latest 
 ```
 
-
+## Using Compose
+See [compose/README.md](compose/README.md)
 
 ## Manual build
-
 __Requirements__:                               
-— Docker >= __18.03.1__                         
+— Docker >= __18.09.0__                         
 — Git *(optional)*
 
 Like any Docker image the building process is pretty straightforward: 
 
 - Clone (or download) the GitHub repository to an empty folder on your local machine:
-```
-$ git clone https://github.com/K4rian/docker-mednafen-server.git .
+```bash
+git clone https://github.com/K4rian/docker-mednafen-server.git .
 ```
 
 - Then run the following command inside the newly created folder:
+```bash
+docker build --no-cache -t k4rian/mednafen-server .
 ```
-$ docker build --no-cache -t k4rian/mednafen-server .
-```
-
-
-
+<!---
+## See also
+* __[Mednafen-Server Egg](https://github.com/K4rian/)__ — A custom egg of Mednafen-Server for the Pterodactyl Panel.
+* __[Mednafen-Server Template](https://github.com/K4rian/)__ — A custom template of Mednafen-Server ready to deploy from the Portainer Web UI.
+--->
 ## License
-
 [MIT](LICENSE)

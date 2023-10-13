@@ -1,5 +1,2 @@
-# Test scripts
 docker_*.sh
-
 _test/*
-compose/*
