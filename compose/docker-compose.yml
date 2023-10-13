@@ -1,0 +1,23 @@
+services:
+  mednafen-server:
+    image: k4rian/mednafen-server:latest
+    container_name: mednafen-server
+    volumes:
+      - data:/home/mednafen
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - mednafen-server.env
+    secrets:
+      - mednafenserver
+    ports:
+      - 4060:4060
+    ulimits:
+      memlock: -1
+    restart: unless-stopped
+
+volumes:
+  data:
+
+secrets:
+  mednafenserver:
+    file: ./secret.txt
