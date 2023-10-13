@@ -1,5 +1,5 @@
 <p align="center">
- <img alt="docker-mednafen-server logo" src="https://github.com/K4rian/docker-mednafen-server/blob/assets/icons/placeholder.svg" width=500 align="center">
+ <img alt="docker-mednafen-server logo" src="https://raw.githubusercontent.com/K4rian/docker-mednafen-server/assets/icons/logo-docker-mednafen-server.svg" width="25%" align="center">
 </p>
 
 A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine).
@@ -11,7 +11,7 @@ Mednafen-Server allows to play many emulator games online via netplay using the 
 
 | Docker Tag | Version | Description | Release Date |
 | ---        | :---:   | ---         | :---:        |
-| [latest](https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile) | 1.1 | Latest stable release | 2023-10-XX |
+| [latest](https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile) | 1.1 | Latest stable release | 2023-10-13 |
 </div>
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
