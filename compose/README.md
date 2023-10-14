@@ -63,7 +63,7 @@ docker ps | grep "mednafen"
 
 To see the server log output:
 ```bash
-docker compose logs mednafen-server
+docker compose -p mednafen-server logs
 ```
 
 ## Stop the container
