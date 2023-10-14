@@ -74,5 +74,5 @@ docker compose -p mednafen-server down
 
 Both the container and its volume can be removed by providing the `-v` argument:
 ```bash
-docker compose -f mednafen-server down -v
+docker compose -p mednafen-server down -v
 ```

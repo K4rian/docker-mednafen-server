@@ -2,8 +2,7 @@
  <img alt="docker-mednafen-server logo" src="https://raw.githubusercontent.com/K4rian/docker-mednafen-server/assets/icons/logo-docker-mednafen-server.svg" width="25%" align="center">
 </p>
 
-A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine).
-<br />
+A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine).<br>
 Mednafen-Server allows to play many emulator games online via netplay using the [Mednafen](https://mednafen.github.io/) multi-system emulator.
 
 ---
@@ -19,11 +18,14 @@ Mednafen-Server allows to play many emulator games online via netplay using the 
 ## Environment variables
 A few environment variables can be tweaked when creating a container to define the server configuration:
 
+<details>
+<summary>Click to expand</summary>
+
 Variable              | Default value  | Description 
 ---                   | ---            | ---
 MDFNSV_MAXCLIENTS     | 50             | Maximum number of clients.
 MDFNSV_CONNECTTIMEOUT | 5              | Connection (login) timeout (in seconds).
-MDFNSV_PORT           | 4046           | Port to listen on.
+MDFNSV_PORT           | 4046           | Port to listen on (TCP).
 MDFNSV_IDLETIMEOUT    | 30             | Idle timeout (in seconds). Disconnect a client if no data is received from them since X seconds ago.
 MDFNSV_MAXCMDPAYLOAD  | 5242880        | The maximum data (in bytes) in the payload of a command to be received by the server (including save state transfers).
 MDFNSV_MINSENDQSIZE   | 262144         | Soft send queue start size (in bytes), and minimum size (memory allocated) it will shrink to.
@@ -32,22 +34,23 @@ MDFNSV_PASSWORD       |                | Server password *(__NOT__ recommended, 
 MDFNSV_ISPUBLIC       | 0              | Make the server public. Ignore the password environment variable (if set) and remove any existing password from the configuration file.
 
 *Descriptions mostly taken from the original __standard.conf__ file in the Mednafen-Server sources.*
+</details>
 
 ## Password protection
 The server can be protected with a (clear, unencrypted) password and defined in various ways:  
 
-— Bind mount a text file containing the password into the container.  
-The mountpoint path has to be `/run/secrets/mednafenserver`.   
+— Bind mount a text file containing the password into the container.<br>
+The mountpoint path has to be `/run/secrets/mednafenserver`.<br>
 This is the __recommended__ method. See the second example in the section below.
 
-— Using the `MDFNSV_PASSWORD` environment variable when creating the container.   
+— Using the `MDFNSV_PASSWORD` environment variable when creating the container.<br>
 This method is __NOT__ recommended for production since all environment variables are visible via `docker inspect` to any user that can use the `docker` command. 
 
-— By editing the `server.conf` file located beside the server binary and accessed by mounting a volume on `/home/mednafen`.   
+— By editing the `server.conf` file located beside the server binary and accessed by mounting a volume on `/home/mednafen`.
 
 ## Usage
-__Example 1:__                                 
-Run a public server on port `40451` with a maximum of `4 clients` and a connection time out of `15 seconds`:    
+__Example 1:__<br>
+Run a public server on port `40451` with a maximum of `4 clients` and a connection time out of `15 seconds`:<br>
 — *The `ulimit` option is optional but highly recommended for the server to run properly.* 
 ```bash
 docker run -d \
@@ -61,8 +64,8 @@ docker run -d \
   -i k4rian/mednafen-server:latest
 ```
 
-__Example 2:__                                     
-Run a password-protected server using default configuration:   
+__Example 2:__<br>
+Run a password-protected server using default configuration:<br>
 — *In this example, the password is stored in the `secret.txt` file located in the current working directory.* 
 ```bash
 docker run -d \
@@ -73,8 +76,8 @@ docker run -d \
   -i k4rian/mednafen-server:latest
 ```
 
-__Example 3:__                                     
-Run a password-protected __testing__ server on port `4444`:   
+__Example 3:__<br />
+Run a password-protected __testing__ server on port `4444`:<br>
 ```bash
 docker run -d \
   --name mednafen-server-test \
@@ -86,11 +89,11 @@ docker run -d \
 ```
 
 ## Using Compose
-See [compose/README.md](compose/README.md)
+See [compose/README.md](compose/)
 
 ## Manual build
-__Requirements__:                               
-— Docker >= __18.09.0__                         
+__Requirements__:<br>
+— Docker >= __18.09.0__<br>
 — Git *(optional)*
 
 Like any Docker image the building process is pretty straightforward: 
