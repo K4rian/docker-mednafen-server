@@ -2,15 +2,15 @@
  <img alt="docker-mednafen-server logo" src="https://raw.githubusercontent.com/K4rian/docker-mednafen-server/assets/icons/logo-docker-mednafen-server.svg" width="25%" align="center">
 </p>
 
-A Docker image for the [Mednafen](https://mednafen.github.io/) standalone server based on the official [Alpine Linux](https://www.alpinelinux.org/) [image](https://hub.docker.com/_/alpine).<br>
-Mednafen-Server allows to play many emulator games online via netplay using the [Mednafen](https://mednafen.github.io/) multi-system emulator.
+A Docker image for the [Mednafen][1] standalone server based on the official [Alpine Linux][2] [image][3].<br>
+Mednafen-Server allows you to play many emulator games online via netplay using the [Mednafen][1] multi-system emulator.
 
 ---
 <div align="center">
 
-| Docker Tag | Version | Description | Release Date |
-| ---        | :---:   | ---         | :---:        |
-| [latest](https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile) | 1.1 | Latest stable release | 2023-10-13 |
+Docker Tag  | Version | Description           | Release Date
+---         | ---     | ---                   | ---
+[latest][4] | 1.1     | Latest stable release | 2023-10-13
 </div>
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
@@ -89,7 +89,7 @@ docker run -d \
 ```
 
 ## Using Compose
-See [compose/README.md](compose/)
+See [compose/README.md][5]
 
 ## Manual build
 __Requirements__:<br>
@@ -107,10 +107,19 @@ git clone https://github.com/K4rian/docker-mednafen-server.git .
 ```bash
 docker build --no-cache -t k4rian/mednafen-server .
 ```
+
 <!---
 ## See also
 * __[Mednafen-Server Egg](https://github.com/K4rian/)__ — A custom egg of Mednafen-Server for the Pterodactyl Panel.
 * __[Mednafen-Server Template](https://github.com/K4rian/)__ — A custom template of Mednafen-Server ready to deploy from the Portainer Web UI.
 --->
+
 ## License
-[MIT](LICENSE)
+[MIT][6]
+
+[1]: https://mednafen.github.io/ "Mednafen Project Page"
+[2]: https://www.alpinelinux.org/ "Alpine Linux Official Website"
+[3]: https://hub.docker.com/_/alpine "Alpine Linux Docker Image"
+[4]: https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile "Latest Dockerfile"
+[5]: https://github.com/K4rian/docker-mednafen-server/tree/main/compose "Compose Files"
+[6]: https://github.com/K4rian/docker-mednafen-server/blob/main/LICENSE
