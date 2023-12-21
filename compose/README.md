@@ -25,7 +25,7 @@ services:
     secrets:
       - mednafenserver
     ports:
-      - 4060:4060
+      - 4060:4060/tcp
     ulimits:
       memlock: -1
     restart: unless-stopped
