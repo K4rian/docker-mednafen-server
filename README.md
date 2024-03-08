@@ -8,9 +8,9 @@ Mednafen-Server allows you to play many emulator games online via netplay using 
 ---
 <div align="center">
 
-Docker Tag  | Version | Description           | Release Date
+Docker Tag  | Version | Description           | Platform
 ---         | ---     | ---                   | ---
-[latest][4] | 1.1     | Latest stable release | 2023-10-13
+[latest][4] | 1.1     | Latest stable release | amd64, arm64
 </div>
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
@@ -56,7 +56,7 @@ Run a public server on port `40451` with a maximum of `4 clients` and a connecti
 docker run -d \
   --name mednafen-server \
   --ulimit memlock=-1 \
-  -p 40451:40451 \
+  -p 40451:40451/tcp \
   -e MDFNSV_MAXCLIENTS=4 \
   -e MDFNSV_CONNECTTIMEOUT=15 \
   -e MDFNSV_PORT=40451 \
@@ -71,7 +71,7 @@ Run a password-protected server using default configuration:<br>
 docker run -d \
   --name mednafen-server \
   --ulimit memlock=-1 \
-  -p 4046:4046 \
+  -p 4046:4046/tcp \
   -v "$(pwd)"/secret.txt:/run/secrets/mednafenserver:ro \
   -i k4rian/mednafen-server:latest
 ```
@@ -82,7 +82,7 @@ Run a password-protected __testing__ server on port `4444`:<br>
 docker run -d \
   --name mednafen-server-test \
   --ulimit memlock=-1 \
-  -p 4444:4444 \
+  -p 4444:4444/tcp \
   -e MDFNSV_PORT=4444 \
   -e MDFNSV_PASSWORD="testing" \
   -i k4rian/mednafen-server:latest 
