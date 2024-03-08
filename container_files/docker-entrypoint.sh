@@ -9,9 +9,11 @@ clear
 
 readonly s_config_file=$HOME/server.conf
 
+echo ""
 echo "░█▄█░█▀▀░█▀▄░█▀█░█▀█░█▀▀░█▀▀░█▀█░░░░░█▀▀░█▀▀░█▀▄░█░█░█▀▀░█▀▄"
 echo "░█░█░█▀▀░█░█░█░█░█▀█░█▀▀░█▀▀░█░█░▄▄▄░▀▀█░█▀▀░█▀▄░▀▄▀░█▀▀░█▀▄"
 echo "░▀░▀░▀▀▀░▀▀░░▀░▀░▀░▀░▀░░░▀▀▀░▀░▀░░░░░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀"
+echo ""
 
 # Generates the config file if it doesn't exists
 if [ ! -f "$s_config_file" ]; then

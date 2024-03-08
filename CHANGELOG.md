@@ -1,3 +1,8 @@
+* **Mar 8, 2024:**
+    * Updated README:
+      - Make the port definitions implicit in the examples.
+    * Improved start-up script cosmetics.
+---
 * **Oct 13, 2023:**
     * Added Compose files.
     * Improved Dockerfile:
