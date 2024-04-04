@@ -115,7 +115,7 @@ docker build --no-cache -t k4rian/mednafen-server .
 --->
 
 ## License
-[MIT][6]
+[GPL-2.0][6]
 
 [1]: https://mednafen.github.io/ "Mednafen Project Page"
 [2]: https://www.alpinelinux.org/ "Alpine Linux Official Website"
