@@ -8,9 +8,9 @@ Mednafen-Server allows you to play many emulator games online via netplay using 
 ---
 <div align="center">
 
-Docker Tag  | Version | Description           | Platform
----         | ---     | ---                   | ---
-[latest][4] | 1.1     | Latest stable release | amd64, arm64
+Docker Tag  | Version | Platform     | Description
+---         | ---     | ---          | ---
+[latest][4] | 1.1     | amd64, arm64 | Latest stable release
 </div>
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
