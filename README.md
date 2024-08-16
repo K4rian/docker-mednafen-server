@@ -13,6 +13,8 @@ Docker Tag  | Version | Platform     | Description
 [latest][4] | 1.2     | amd64, arm64 | Latest release
 [1.2][4]    | 1.2     | amd64, arm64 | Latest release
 </div>
+
+---
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
 ---
@@ -40,12 +42,12 @@ MDFNSV_ISPUBLIC       | 0              | Make the server public. Ignore the pass
 ## Password protection
 The server can be protected with a (clear, unencrypted) password and defined in various ways:  
 
-— Bind mount a text file containing the password into the container.<br>
-The mountpoint path has to be `/run/secrets/mednafenserver`.<br>
+— Bind mounting a text file containing the password into the container.<br>
+The mount point path must be `/run/secrets/mednafenserver`.<br>
 This is the __recommended__ method. See the second example in the section below.
 
 — Using the `MDFNSV_PASSWORD` environment variable when creating the container.<br>
-This method is __NOT__ recommended for production since all environment variables are visible via `docker inspect` to any user that can use the `docker` command. 
+This method is __NOT__ recommended for production, as all environment variables are visible via `docker inspect` to any user that can use the `docker` command. 
 
 — By editing the `server.conf` file located beside the server binary and accessed by mounting a volume on `/home/mednafen`.
 
@@ -60,7 +62,6 @@ docker run -d \
   -p 4046:4046/tcp \
   -e MDFNSV_MAXCLIENTS=4 \
   -e MDFNSV_CONNECTTIMEOUT=15 \
-  -e MDFNSV_PORT=4046 \
   -e MDFNSV_ISPUBLIC=1 \
   -i k4rian/mednafen-server
 ```
