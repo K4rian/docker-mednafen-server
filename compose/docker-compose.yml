@@ -2,6 +2,7 @@ services:
   mednafen-server:
     image: k4rian/mednafen-server:latest
     container_name: mednafen-server
+    hostname: mednafen
     volumes:
       - data:/home/mednafen
       - /etc/localtime:/etc/localtime:ro

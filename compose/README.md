@@ -17,6 +17,7 @@ services:
   mednafen-server:
     image: k4rian/mednafen-server:latest
     container_name: mednafen-server
+    hostname: mednafen
     volumes:
       - data:/home/mednafen
       - /etc/localtime:/etc/localtime:ro
@@ -38,14 +39,14 @@ secrets:
     file: ./secret.txt
 ```
 
-> The environment file *[mednafen-server.env](mednafen-server.env)* holds the server environment variables.
-> 
-> The server password is defined in the *[secret.txt](secret.txt)* file.   
-> — Compose will mount it to `/run/secrets/mednafenserver` within the container.
-> 
-> The secret name has to be `mednafenserver`.  
-> 
-> To make the server public, the `secrets` definitions in the compose file have to be omitted.
+* The environment file *[mednafen-server.env](mednafen-server.env)* holds the server environment variables.
+
+* The server password is defined in the *[secret.txt](secret.txt)* file.<br>
+Compose will mount it to `/run/secrets/mednafenserver` within the container.
+
+* The secret name must be `mednafenserver`.
+
+* To make the server public, omit the `secrets` definitions in the Compose file.
 
 ## Deployment
 ```bash
