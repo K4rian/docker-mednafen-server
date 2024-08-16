@@ -10,7 +10,8 @@ Mednafen-Server allows you to play many emulator games online via netplay using 
 
 Docker Tag  | Version | Platform     | Description
 ---         | ---     | ---          | ---
-[latest][4] | 1.1     | amd64, arm64 | Latest stable release
+[latest][4] | 1.2     | amd64, arm64 | Latest release
+[1.2][4]    | 1.2     | amd64, arm64 | Latest release
 </div>
 <p align="center"><a href="#environment-variables">Environment variables</a> &bull; <a href="#password-protection">Password protection</a> &bull; <a href="#usage">Usage</a> &bull; <a href="#using-compose">Using Compose</a> &bull; <a href="#manual-build">Manual build</a> <!-- &bull; <a href="#see-also">See also</a> --> &bull; <a href="#license">License</a></p>
 
@@ -50,30 +51,31 @@ This method is __NOT__ recommended for production since all environment variable
 
 ## Usage
 __Example 1:__<br>
-Run a public server on port `40451` with a maximum of `4 clients` and a connection time out of `15 seconds`:<br>
+Run a public server on default port `4046` with a maximum of `4 clients` and a connection time out of `15 seconds`:<br>
 — *The `ulimit` option is optional but highly recommended for the server to run properly.* 
 ```bash
 docker run -d \
   --name mednafen-server \
   --ulimit memlock=-1 \
-  -p 40451:40451/tcp \
+  -p 4046:4046/tcp \
   -e MDFNSV_MAXCLIENTS=4 \
   -e MDFNSV_CONNECTTIMEOUT=15 \
-  -e MDFNSV_PORT=40451 \
+  -e MDFNSV_PORT=4046 \
   -e MDFNSV_ISPUBLIC=1 \
-  -i k4rian/mednafen-server:latest
+  -i k4rian/mednafen-server
 ```
 
 __Example 2:__<br>
-Run a password-protected server using default configuration:<br>
+Run a password-protected server with default settings on port `40451`:<br>
 — *In this example, the password is stored in the `secret.txt` file located in the current working directory.* 
 ```bash
 docker run -d \
   --name mednafen-server \
   --ulimit memlock=-1 \
-  -p 4046:4046/tcp \
+  -p 40451:40451/tcp \
+  -e MDFNSV_PORT=40451 \
   -v "$(pwd)"/secret.txt:/run/secrets/mednafenserver:ro \
-  -i k4rian/mednafen-server:latest
+  -i k4rian/mednafen-server
 ```
 
 __Example 3:__<br />
@@ -85,7 +87,7 @@ docker run -d \
   -p 4444:4444/tcp \
   -e MDFNSV_PORT=4444 \
   -e MDFNSV_PASSWORD="testing" \
-  -i k4rian/mednafen-server:latest 
+  -i k4rian/mednafen-server
 ```
 
 ## Using Compose
