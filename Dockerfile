@@ -6,7 +6,7 @@ RUN apk update \
     && apk -U add --no-cache \
         build-base \
         ca-certificates \
-        git\
+        git \
         libstdc++ \
         wget \
     && mkdir -p /server/lib \
