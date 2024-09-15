@@ -4,11 +4,11 @@ WORKDIR /tmp/mednafen
 
 RUN apk update \
     && apk -U add --no-cache \
-        build-base=0.5-r3 \
-        ca-certificates=20240705-r0 \
-        git=2.45.2-r0 \
-        libstdc++=13.2.1_git20240309-r0 \
-        wget=1.24.5-r0 \
+        build-base \
+        ca-certificates \
+        git\
+        libstdc++ \
+        wget \
     && mkdir -p /server/lib \
     && git clone "https://github.com/K4rian/mednafen-server-git.git" /tmp/mednafen \
     && ( [ "$(uname -m)" = "x86_64" ] && ./configure || ./configure --build=aarch64-unknown-linux-gnu ) \

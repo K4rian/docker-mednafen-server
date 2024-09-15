@@ -10,8 +10,8 @@ Mednafen-Server allows you to play many emulator games online via netplay using 
 
 Docker Tag  | Version | Platform     | Description
 ---         | ---     | ---          | ---
-[latest][4] | 1.2     | amd64, arm64 | Latest release
-[1.2][4]    | 1.2     | amd64, arm64 | Latest release
+[latest][7] | 1.2     | amd64, arm64 | Latest release
+[1.2][7]    | 1.2     | amd64, arm64 | Latest release
 </div>
 
 ---
@@ -126,3 +126,4 @@ docker build --no-cache -t k4rian/mednafen-server .
 [4]: https://github.com/K4rian/docker-mednafen-server/blob/main/Dockerfile "Latest Dockerfile"
 [5]: https://github.com/K4rian/docker-mednafen-server/tree/main/compose "Compose Files"
 [6]: https://github.com/K4rian/docker-mednafen-server/blob/main/LICENSE
+[7]: https://github.com/K4rian/docker-mednafen-server/blob/683429e63704fe75f95c130435b3c0b88bda6e9c/Dockerfile "Dockerfile v1.2"
